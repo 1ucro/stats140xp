@@ -10,9 +10,7 @@
 city_to_county <- read_excel("data/city_to_county_data/CIX_EachDataSet_2020-21_20221009_V9.xlsx")
 
 # Streamline column names
-names(city_to_county) <- str_replace_all(string       =  names(city_to_county)
-                                       , pattern      =  " "
-                                       , replacement  =  "\\_") |> tolower()
+names(city_to_county) <- str_replace_all(names(city_to_county), " ", "\\_") |> tolower()
 
 # Retain relevant variables
 city_to_county <- city_to_county |> select(city, county_name, zip)
