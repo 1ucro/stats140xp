@@ -1,6 +1,6 @@
 #==============================================================================
 # File           :  x00_control_scripts
-# Purpose        :  Control work flow for Stats 140XP final project
+# Purpose        :  Control workflow for Stats 140XP project
 # Notes          :
 # Last modified  :  02/27/2023
 #==============================================================================
@@ -15,7 +15,7 @@ source("x01_load_libraries.R")
 ## 3.1 Prepare auditor data -----------------------------------------------
 source("x02_prep_auditor_data.R")
 
-## 3.2 Prepare voter turnout data -----------------------------------------
+## 3.2 Prepare voter registration data ------------------------------------
 source("x03_prep_voting_data.R")
 
 ## 3.3 Prepare final data ------------------------------------------------
