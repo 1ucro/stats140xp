@@ -25,8 +25,7 @@ final_data <- left_join(final_data, county_voter_reg, by = "county_name")
 # 3. Add demographic variables to auditor data ----------------------------
 ## 3.1 Area median income (AMI) by county ---------------------------------
 # Source: https://data.ca.gov/dataset/income-limits-by-county
-county_income <- read_csv("data/census_data/2022-income-limits.csv") |>
-  select(County, AMI)
+county_income <- read_csv("data/census_data/2022-income-limits.csv") |> select(County, AMI)
 final_data <- left_join(final_data, county_income, by = c("county_name" = "County"))
 
 # In-progress -------------------------------------------------------------
