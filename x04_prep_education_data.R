@@ -16,35 +16,30 @@ county_ed <- read_xlsx(path       =  "data/econ_research_data/Education_edited.x
 
 # 2. Organize education data ----------------------------------------------
 # Streamline column names
-ed_cats <- c("prop_less_hs", "prop_only_hs", "prop_some_college", "prop_college")
-names(county_ed) <- c("county_name", paste0("county_1970_", ed_cats),
-                      paste0("county_1980_", ed_cats),
-                      paste0("county_1990_", ed_cats),
-                      paste0("county_2000_", ed_cats),
-                      paste0("county_2008_12_", ed_cats),
-                      paste0("county_2017_21_", ed_cats))
+ed_cats <- c("less_hs", "only_hs", "some_college", "college")
+names(county_ed) <- c("county", paste0("county_", ed_cats, "_1970"),
+                      paste0("county_", ed_cats, "_1980"),
+                      paste0("county_", ed_cats, "_1990"),
+                      paste0("county_", ed_cats, "_2000"),
+                      paste0("county_", ed_cats, "_2008_12"),
+                      paste0("county_", ed_cats, "_2017_21"))
 
 # Remove "County" in county name to facilitate join by county
-county_ed$county_name <- str_replace_all(string       =  county_ed$county_name
-                                       , pattern      =  " County"
-                                       , replacement  =  "")
+county_ed$county <- str_replace_all(string       =  county_ed$county
+                                  , pattern      =  " County"
+                                  , replacement  =  "")
 
 # 3. Create new variables -------------------------------------------------
-# Extract statewide row to compare counties with state average
-ca_ed <- county_ed |> filter(county_name == "California")
-county_ed <- county_ed |> filter(county_name != "California")
+# Remove statewide row (can always compute avg)
+county_ed <- county_ed |> filter(county != "California")
 
 # Emphasize values are percents by dividing values by 100
 county_ed[, -1] <- county_ed[, -1] / 100
 
-# Determine whether counties are above or below state college completion average
-county_ed$county_1970_ca_relative_college <- if_else(county_ed$county_1970_prop_college >= ca_ed$county_1970_prop_college, 1, 0)
-county_ed$county_1980_ca_relative_college <- if_else(county_ed$county_1980_prop_college >= ca_ed$county_1980_prop_college, 1, 0)
-county_ed$county_1990_ca_relative_college <- if_else(county_ed$county_1990_prop_college >= ca_ed$county_1990_prop_college, 1, 0)
-county_ed$county_2000_ca_relative_college <- if_else(county_ed$county_2000_prop_college >= ca_ed$county_2000_prop_college, 1, 0)
-county_ed$county_2008_12_ca_relative_college <- if_else(county_ed$county_2008_12_prop_college >= ca_ed$county_2008_12_prop_college, 1, 0)
-county_ed$county_2017_21_ca_relative_college <- if_else(county_ed$county_2017_21_prop_college >= ca_ed$county_2017_21_prop_college, 1, 0)
+# Focus on college (or higher) education levels since 2000
+recent_college_plus <- c("college_2000", "college_2008", "college_2017")
+county_ed <- county_ed |> select(county, contains(c(recent_college_plus)) & !contains("some"))
 
 # 4. Clean workspace ------------------------------------------------------
-rm(ed_cats, ca_ed)
+rm(ed_cats, recent_college_plus)
 

@@ -13,47 +13,51 @@ city_to_county <- read_xlsx("data/city_to_county_data/CIX_EachDataSet_2020-21_20
 names(city_to_county) <- str_replace_all(names(city_to_county), " ", "\\_") |> tolower()
 
 # Retain relevant variables
-city_to_county <- city_to_county |> select(city, county_name, zip)
+city_to_county <- city_to_county |> select(city, "county" =  county_name, "zipcode" = zip)
 
-# Rename city column to city_name to serve as merger key
-names(city_to_county)[names(city_to_county) == "city"] <- "city_name"
+# Strip sub-zipcodes from city zipcodes for easier linkage with external data
+city_to_county$zipcode <- str_replace_all(city_to_county$zipcode, "\\-\\d*", "")
 
 # 2. Add counties and zip to auditor data ---------------------------------
 # Merge auditor data and city-county dictionary to define county key
-final_data <- left_join(auditor_data, city_to_county, by = "city_name")
+final_data <- left_join(auditor_data, city_to_county, by = "city")
 
 # Manually insert county for 4 cities that are lacking in dictionary
 # Source: City websites
-final_data[final_data$city_name == "Carmel-by-the-Sea", "county_name"] <- "Monterey"
-final_data[final_data$city_name == "Gustine", "county_name"] <- "Merced"
-final_data[final_data$city_name == "Paso Robles", "county_name"] <- "San Luis Obispo"
-final_data[final_data$city_name == "Ventura", "county_name"] <- "Ventura"
+final_data$county[final_data$city_name == "Carmel-by-the-Sea"] <- "Monterey"
+final_data$county[final_data$city_name == "Gustine"] <- "Merced"
+final_data$county[final_data$city_name == "Paso Robles"] <- "San Luis Obispo"
+final_data$county[final_data$city_name == "Ventura"] <- "Ventura"
 
 # Manually insert zipcode for 4 cities that are lacking in dictionary
 # Source: First zipcode associated with city on Wikipedia
-final_data[final_data$city_name == "Carmel-by-the-Sea", "zip"] <- "93921"
-final_data[final_data$city_name == "Gustine", "zip"] <- "95322"
-final_data[final_data$city_name == "Paso Robles", "zip"] <- "93446"
-final_data[final_data$city_name == "Ventura", "zip"] <- "93001"
+final_data$zipcode[final_data$city_name == "Carmel-by-the-Sea"] <- "93921"
+final_data$zipcode[final_data$city_name == "Gustine"] <- "95322"
+final_data$zipcode[final_data$city_name == "Paso Robles"] <- "93446"
+final_data$zipcode[final_data$city_name == "Ventura"] <- "93001"
 
 # Merge auditor and voter registration data by county key
-final_data <- left_join(final_data, county_voter_reg, by = "county_name")
+final_data <- left_join(final_data, county_voter_reg, by = "county")
 
 # 3. Add demographic variables to auditor data ----------------------------
 ## 3.1 Area median income (AMI) by county ---------------------------------
 # Source: https://data.ca.gov/dataset/income-limits-by-county
 county_income <- read_csv("data/census_data/2022-income-limits.csv") |> select(County, AMI)
-final_data <- left_join(final_data, county_income, by = c("county_name" = "County"))
+final_data <- left_join(final_data, county_income, by = c("county" = "County"))
 
 ## 3.2 County relative education levels over time -------------------------
 # Source: https://www.ers.usda.gov/data-products/county-level-data-sets/county-level-data-sets-download-data/
-final_data <- left_join(final_data, county_ed, by = "county_name")
+final_data <- left_join(final_data, county_ed, by = "county")
 
 ## 3.2 County unemployment levels over time -------------------------------
 # Source: https://www.ers.usda.gov/data-products/county-level-data-sets/county-level-data-sets-download-data/
-final_data <- left_join(final_data, county_jobs, by = "county_name")
+final_data <- left_join(final_data, county_unemployment, by = "county")
 
 # In-progress -------------------------------------------------------------
+
+# Place geographical columns (city, county, zipcode) in beginning for clarity
+loc_vars <- c("city", "county", "zipcode")
+final_data <- data.frame(final_data |> select(all_of(loc_vars)), final_data |> select(!all_of(loc_vars)))
 
 # Determine spread of missing values
 prop_na_orig <- mean(is.na(final_data))
@@ -68,5 +72,5 @@ industry_zip <- read.table("data/census_data/zbp20detail.txt", nrows = 100, row.
 # 5. Clean workspace ------------------------------------------------------
 write_csv(final_data, "final_data_ip.csv")
 rm(city_to_county, county_income, county_voter_reg, auditor_data, county_ed,
-   county_jobs, industry_zip)
+   county_unemployment, industry_zip, loc_vars)
 
