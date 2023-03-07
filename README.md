@@ -17,4 +17,5 @@ I downloaded all the data and organized them into a data folder within the R pro
 - [CA county employment levels (*edited*) (2000-2020)](https://www.ers.usda.gov/data-products/county-level-data-sets/county-level-data-sets-download-data/)
 
 **Notes**:
+
 I manually edited the education and employment data (from ERS) within Excel before loading it into R by creating new sheets (named *formatted_ca_data*) within the existing workbooks that contains just CA data. For transparency, I have uploaded these modified Excel workbooks to our repo as well (see *Education_edited.xlsx* and *Unemployment_edited.xlsx*).
