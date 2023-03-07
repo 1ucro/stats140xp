@@ -21,6 +21,6 @@ Next steps (Friday):
 2. (03/06) I manually edited the education and employment data (from ERS) within Excel before loading it into R by creating new sheets (named *formatted_ca_data*) within the existing workbooks that contains just CA data. For transparency, I have uploaded these modified Excel workbooks to our repo as well (see *Education_edited.xlsx* and *Unemployment_edited.xlsx*).
 
 3. (03/06) I have removed ~60 variables from the previous *final_data_ip.csv* file
-- by taking the average unemployment per county over 5 years (instead of annually);
-- by focusing on bachelor's attainment rates per county (instead of all levels of education [*e.g.*, less than HS, HS, some college, college and above];
-- and by collapsing eligible voters and registered voters per county into one registration rate variable
++ by taking the average unemployment per county over 5 years (instead of annually);
++ by focusing on bachelor's attainment rates per county (instead of all levels of education [*e.g.*, less than HS, HS, some college, college and above];
++ and by collapsing eligible voters and registered voters per county into one *registration_rate* variable
