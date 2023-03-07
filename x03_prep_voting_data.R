@@ -11,12 +11,12 @@ counties_voter_reg_02 <- read_excel("data/voter_registration_data/county_2002.xl
 counties_voter_reg_03 <- read_excel("data/voter_registration_data/county_2003.xls")[, 1:3]
 counties_voter_reg_04 <- read_excel("data/voter_registration_data/county_2004.xls")[, 1:3]
 counties_voter_reg_05 <- read_excel("data/voter_registration_data/county_2005.xls")[, 1:3]
-counties_voter_reg_06 <- read_excel("data/voter_registration_data/county_2006.xls")[, 1:3]
-counties_voter_reg_07 <- read_excel("data/voter_registration_data/county_2007.xls")[, 1:3]
-counties_voter_reg_08 <- read_excel("data/voter_registration_data/county_2008.xls")[, 1:3]
-counties_voter_reg_09 <- read_excel("data/voter_registration_data/county_2009.xls")[, 1:3]
-counties_voter_reg_10 <- read_excel("data/voter_registration_data/county_2010.xls")[, 1:3]
-counties_voter_reg_11 <- read_excel("data/voter_registration_data/county_2011.xls")[, 1:3]
+counties_voter_reg_06 <- read_excel("data/voter_registration_data/county_2006.xls")[, c(1, 3:4)]
+counties_voter_reg_07 <- read_excel("data/voter_registration_data/county_2007.xls")[, c(1, 3:4)]
+counties_voter_reg_08 <- read_excel("data/voter_registration_data/county_2008.xls")[, c(1, 3:4)]
+counties_voter_reg_09 <- read_excel("data/voter_registration_data/county_2009.xls")[, c(1, 3:4)]
+counties_voter_reg_10 <- read_excel("data/voter_registration_data/county_2010.xls")[, c(1, 3:4)]
+counties_voter_reg_11 <- read_excel("data/voter_registration_data/county_2011.xls")[, c(1, 3:4)]
 counties_voter_reg_12 <- read_excel("data/voter_registration_data/county_2012.xls")[, 1:3]
 counties_voter_reg_13 <- read_excel("data/voter_registration_data/county_2013.xls")[, 1:3]
 counties_voter_reg_14 <- read_excel("data/voter_registration_data/county_2014.xls")[, 1:3]
@@ -121,4 +121,3 @@ rm(counties_voter_reg_02, counties_voter_reg_03, counties_voter_reg_04,
    counties_voter_reg_14, counties_voter_reg_15, counties_voter_reg_16,
    counties_voter_reg_17, counties_voter_reg_18, counties_voter_reg_19,
    counties_voter_reg_20, fix_format)
-
