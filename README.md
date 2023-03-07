@@ -11,8 +11,8 @@ To recreate the data, please download and run the R script files. All data sourc
 - [CA county voter registration (2002-2020)](https://www.sos.ca.gov/elections/voter-registration/voter-registration-statistics) 
 - [CA city-county dictionary](https://bythenumbers.sco.ca.gov/Raw-Data/Cities-Raw-Data-for-Fiscal-Years-2020-21/kyrq-f99p)
 - [CA median county income (2022)](https://data.ca.gov/dataset/income-limits-by-county)
-- [CA county education levels (*edited*) (1970-2020)](https://www.ers.usda.gov/data-products/county-level-data-sets/county-level-data-sets-download-data/)
-- [CA county employment levels (*edited*) (2000-2020)](https://www.ers.usda.gov/data-products/county-level-data-sets/county-level-data-sets-download-data/)
+- [CA county education levels (2000-2020)](https://www.ers.usda.gov/data-products/county-level-data-sets/county-level-data-sets-download-data/)
+- [CA county employment levels (2000-2020)](https://www.ers.usda.gov/data-products/county-level-data-sets/county-level-data-sets-download-data/)
 
 ## Notes
 1. (02/23) I downloaded all the data and organized them into a data folder within the R project. As such, you may need to revise some of the code if you run it on your own computer. Let me know if I can clarify any components.
