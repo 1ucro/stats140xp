@@ -2,9 +2,9 @@
 
 To recreate the data, please download and run the R script files. All data sources (URLs) should be listed in the script files as comments. The (in-progress) final data set (final_data_ip.csv) can also be accessed directly by downloading it from this repo.
 
-Next steps (Friday): 
-- Add Census Bureau demographic variables by zipcode (esp. gender & age)
-- EDA
+Next steps (Tuesday): 
+- (Tuesday-Wednesday) Add gender and age demographic variables
+- (Wednesday-Thursday) Complete EDA and variable selection 
 
 **Data**:
 - [CA auditor (2016-2020)](https://www.auditor.ca.gov/local_high_risk/dashboard-csa) 
