@@ -21,8 +21,11 @@ source("x03_prep_voting_data.R")
 ## 3.3 Prepare education data ---------------------------------------------
 source("x04_prep_education_data.R")
 
-## 3.4 Prepare final data ------------------------------------------------
-source("x05_prep_final_data.R")
+## 3.4 Prepare employment data --------------------------------------------
+source("x05_prep_employment_data.R")
+
+## 3.5 Prepare final data ------------------------------------------------
+source("x06_prep_final_data.R")
 
 # 4. Build model ----------------------------------------------------------
 # source("x03_build_model.R") - Future

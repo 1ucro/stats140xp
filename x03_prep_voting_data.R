@@ -29,25 +29,26 @@ counties_voter_reg_20 <- read_excel("data/voter_registration_data/county_2020.xl
 
 # 2. Clean county voter registration --------------------------------------
 # 2.1 Streamline column names ---------------------------------------------
-names(counties_voter_reg_02) <- c("county", "eligible", "registered")
-names(counties_voter_reg_03) <- c("county", "eligible", "registered")
-names(counties_voter_reg_04) <- c("county", "eligible", "registered")
-names(counties_voter_reg_05) <- c("county", "eligible", "registered")
-names(counties_voter_reg_06) <- c("county", "eligible", "registered")
-names(counties_voter_reg_07) <- c("county", "eligible", "registered")
-names(counties_voter_reg_08) <- c("county", "eligible", "registered")
-names(counties_voter_reg_09) <- c("county", "eligible", "registered")
-names(counties_voter_reg_10) <- c("county", "eligible", "registered")
-names(counties_voter_reg_11) <- c("county", "eligible", "registered")
-names(counties_voter_reg_12) <- c("county", "eligible", "registered")
-names(counties_voter_reg_13) <- c("county", "eligible", "registered")
-names(counties_voter_reg_14) <- c("county", "eligible", "registered")
-names(counties_voter_reg_15) <- c("county", "eligible", "registered")
-names(counties_voter_reg_16) <- c("county", "eligible", "registered")
-names(counties_voter_reg_17) <- c("county", "eligible", "registered")
-names(counties_voter_reg_18) <- c("county", "eligible", "registered")
-names(counties_voter_reg_19) <- c("county", "eligible", "registered")
-names(counties_voter_reg_20) <- c("county", "eligible", "registered")
+voter_reg_vars <- c("county", "eligible", "registered")
+names(counties_voter_reg_02) <- voter_reg_vars
+names(counties_voter_reg_03) <- voter_reg_vars
+names(counties_voter_reg_04) <- voter_reg_vars
+names(counties_voter_reg_05) <- voter_reg_vars
+names(counties_voter_reg_06) <- voter_reg_vars
+names(counties_voter_reg_07) <- voter_reg_vars
+names(counties_voter_reg_08) <- voter_reg_vars
+names(counties_voter_reg_09) <- voter_reg_vars
+names(counties_voter_reg_10) <- voter_reg_vars
+names(counties_voter_reg_11) <- voter_reg_vars
+names(counties_voter_reg_12) <- voter_reg_vars
+names(counties_voter_reg_13) <- voter_reg_vars
+names(counties_voter_reg_14) <- voter_reg_vars
+names(counties_voter_reg_15) <- voter_reg_vars
+names(counties_voter_reg_16) <- voter_reg_vars
+names(counties_voter_reg_17) <- voter_reg_vars
+names(counties_voter_reg_18) <- voter_reg_vars
+names(counties_voter_reg_19) <- voter_reg_vars
+names(counties_voter_reg_20) <- voter_reg_vars
 
 # 2.2 Tidy data -----------------------------------------------------------
 fix_format <- function(x) {x |> filter(!(county %in% c(NA, "Percent", "State Total")))}
@@ -120,4 +121,4 @@ rm(counties_voter_reg_02, counties_voter_reg_03, counties_voter_reg_04,
    counties_voter_reg_11, counties_voter_reg_12, counties_voter_reg_13,
    counties_voter_reg_14, counties_voter_reg_15, counties_voter_reg_16,
    counties_voter_reg_17, counties_voter_reg_18, counties_voter_reg_19,
-   counties_voter_reg_20, fix_format)
+   counties_voter_reg_20, fix_format, voter_reg_vars)

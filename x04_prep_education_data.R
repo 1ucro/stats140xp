@@ -1,15 +1,15 @@
 #==============================================================================
 # File           :  x04_prep_education_data
 # Purpose        :  Load and clean data on county education levels (1970-2021)
-# Notes          :  Original xlsx data copied second sheet ("formatted_ca_data")
+# Notes          :  Original xlsx data copied to new sheet ("formatted_ca_data")
 #                   and limited to CA entries
 # Last modified  :  03/06/2023
 #==============================================================================
 
-# 1. Load education daa ---------------------------------------------------
+# 1. Load education data ---------------------------------------------------
 # Source: https://www.ers.usda.gov/data-products/county-level-data-sets/county-level-data-sets-download-data/
 # Focus on percent values to facilitate cross-county comparisons
-county_ed <- read_xlsx(path       =  "data/econ_research_data/Education.xlsx",
+county_ed <- read_xlsx(path       =  "data/econ_research_data/Education_edited.xlsx",
                        sheet      =  "formatted_ca_data",
                        col_names  =  TRUE) |>
   select(starts_with("Area") | contains("Percent"))
