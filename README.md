@@ -14,6 +14,8 @@ To recreate the data, please download and run the R script files. All data sourc
 - [CA county education levels (2000-2020)](https://www.ers.usda.gov/data-products/county-level-data-sets/county-level-data-sets-download-data/)
 - [CA county employment levels (2000-2020)](https://www.ers.usda.gov/data-products/county-level-data-sets/county-level-data-sets-download-data/)
 
+*Important disclaimer*: Most of our external data describe county-level socioeconomic trends. While models we build using this data may be less precise than models built on city-level data, we expect that demographic and economic variables associated with city fiscal health do not occur in isolation. Cities located in the same county are likely impacted by socioeconomic trends in neighboring cities. By utilizing county-level data, we can average out potential city-level interactions and thereby focus on identifying (generalizable) significant predictors of CA cities' fiscal health. 
+
 ## Notes
 1. (02/23) I downloaded all the data and organized them into a data folder within the R project. As such, you may need to revise some of the code if you run it on your own computer. Let me know if I can clarify any components.
 
