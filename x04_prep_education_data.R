@@ -3,7 +3,7 @@
 # Purpose        :  Load and clean data on county education levels (1970-2021)
 # Notes          :  Original xlsx data copied to new sheet ("formatted_ca_data")
 #                   and limited to CA entries
-# Last modified  :  03/06/2023
+# Last modified  :  03/07/2023
 #==============================================================================
 
 # 1. Load education data ---------------------------------------------------

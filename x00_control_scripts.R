@@ -2,7 +2,7 @@
 # File           :  x00_control_scripts
 # Purpose        :  Control workflow for Stats 140XP project
 # Notes          :
-# Last modified  :  03/06/2023
+# Last modified  :  03/07/2023
 #==============================================================================
 
 # 1. Prepare global environment -------------------------------------------
@@ -22,10 +22,13 @@ source("x03_prep_voting_data.R")
 source("x04_prep_education_data.R")
 
 ## 3.4 Prepare employment data --------------------------------------------
-source("x05_prep_employment_data.R")
+source("x05_prep_econ_data.R")
 
-## 3.5 Prepare final data ------------------------------------------------
-source("x06_prep_final_data.R")
+## 3.5 Prepare demographic data -------------------------------------------
+source("x06_prep_demographic_data.R")
+
+## 3.6 Prepare final data ------------------------------------------------
+source("x07_prep_final_data.R")
 
 # 4. Build model ----------------------------------------------------------
 # source("x03_build_model.R") - Future
