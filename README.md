@@ -27,3 +27,5 @@ To recreate the data, please download and run the R script files. All data sourc
 - collapsing eligible voters and registered voters per county into one *registration_rate* variable
 
 4. (03/07) Added ~120 economic, gender, and age county-level variables (most in the 2000-2020 period). Removed median income (AMI) variable since wage info now covered with other datasets. Unless we think of new variables, data expansion is complete.
+
+5. (03/09) We decided to focus on fiscal health (measured by pension burden metrics) from 2018 as our outcome and voter registration and demographic variables from 2008 as our predictors. Note that Ventura (the city and corresponding county) is officially known as San Buenaventura. As of now, we have verified that the city-county datasets have merged correctly, but keep in mind that we call the city "Ventura."
