@@ -1,6 +1,6 @@
 # Stats 140XP Project
 
-To recreate the data, please download and run the R script files. All data sources (URLs) should be listed in the script files as comments. The (in-progress) final data set (final_data_ip.csv) can also be accessed directly by downloading it from this repo.
+To recreate the data, please download and run the R script files. All data sources (URLs) should be listed in the script files as comments. The full (in-progress) final data set (*final_data_ip.csv*) can be accessed directly by downloading it from this repo. 
 
 ## Next steps
 - (Wednesday-Thursday) Complete EDA and variable selection 
