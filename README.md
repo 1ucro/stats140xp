@@ -29,4 +29,4 @@ To recreate the data, run the R scripts above. All data sources (URLs) should be
 
 5. (03/09) We decided to focus on fiscal health (measured by pension burden metrics) from 2018 as our outcome and voter registration and demographic variables from 2008 as our predictors. Note that Ventura (the city and corresponding county) is officially known as San Buenaventura. As of now, we have verified that the city-county datasets have merged correctly, but keep in mind that we call the city "Ventura."
 
-6. (03/11) Added 2008 county voter registration and precinct variables. Fixed issue where 2008 county unemployment was removed from finald data. Uploaded updated R scripts incorporating these changes.
+6. (03/11) Added 2008 county voter registration and precinct variables. Fixed issue where 2008 county unemployment was removed from final data. Uploaded updated R scripts incorporating these changes.
