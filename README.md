@@ -21,9 +21,9 @@ To recreate the data, run the R scripts above. All data sources (URLs) should be
 2. (03/06) I manually edited the education and employment data (from ERS) within Excel before loading it into R by creating new sheets (named *formatted_ca_data*) within the existing workbooks that contains just CA data. For transparency, I have uploaded these modified Excel workbooks to our repo as well (see *Education_edited.xlsx* and *Unemployment_edited.xlsx*).
 
 3. (03/06) Removed ~60 variables from the previous *final_data_ip.csv* file by
-- taking the average unemployment per county over 5 years (instead of annually);
-- focusing on bachelor's attainment rates per county (instead of all levels of education [*e.g.*, less than HS, HS, some college, college and above];
-- collapsing eligible voters and registered voters per county into one *registration_rate* variable
+	- taking the average unemployment per county over 5 years (instead of annually);
+	- focusing on bachelor's attainment rates per county (instead of all levels of education [*e.g.*, less than HS, HS, some college, college and above];
+	- collapsing eligible voters and registered voters per county into one *registration_rate* variable
 
 4. (03/07) Added ~120 economic, gender, and age county-level variables (most in the 2000-2020 period). Removed median income (AMI) variable since wage info now covered with other datasets. Unless we think of new variables, data expansion is complete.
 
