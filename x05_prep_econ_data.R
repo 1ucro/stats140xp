@@ -15,7 +15,8 @@ unemployment <- read_xlsx(path       =  "data/econ_research_data/Unemployment_ed
   select(starts_with("Area") | contains("rate"))
 
 # Streamline column names
-names(unemployment) <- c("county", tolower(str_remove(names(unemployment)[-1], "rate_")))
+names(unemployment) <- c("county", paste0("county_", tolower(str_remove(names(unemployment)[-1], "rate_"))))
+names(unemployment) <- str_remove(names(unemployment), "20")
 
 # Remove "County" in county name to facilitate join by county
 unemployment$county <- str_remove(unemployment$county, " County, CA")
@@ -30,12 +31,13 @@ unemployment <- rm_ca_obs(unemployment)
 # Emphasize values are percents by dividing values by 100
 unemployment[, -1] <- unemployment[, -1] / 100
 
-# Retain just average 5-yr county unemployment
+# Compute average 5-yr county unemployment
 unemployment <- data.frame("county" = unemployment |> select(county)
-    , "county_avg_unemployed_00_04" = unemployment |> select(unemployment_2000:unemployment_2004) |> rowMeans()
-    , "county_avg_unemployed_05_09" = unemployment |> select(unemployment_2005:unemployment_2009) |> rowMeans()
-    , "county_avg_unemployed_10_04" = unemployment |> select(unemployment_2010:unemployment_2014) |> rowMeans()
-    , "county_avg_unemployed_15_20" = unemployment |> select(unemployment_2015:unemployment_2020) |> rowMeans())
+    , "county_avg_unemployed_00_04" = unemployment |> select(county_unemployment_00:county_unemployment_04) |> rowMeans()
+    , "county_avg_unemployed_05_09" = unemployment |> select(county_unemployment_05:county_unemployment_09) |> rowMeans()
+    , "county_avg_unemployed_10_04" = unemployment |> select(county_unemployment_10:county_unemployment_14) |> rowMeans()
+    , "county_avg_unemployed_15_20" = unemployment |> select(county_unemployment_15:county_unemployment_20) |> rowMeans()
+    , unemployment |> select(!c(county)))
 
 # 2. Load GDP data --------------------------------------------------------
 # Source: https://apps.bea.gov/regional/downloadzip.cfm

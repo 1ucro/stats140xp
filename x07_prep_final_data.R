@@ -26,6 +26,7 @@ final_data <- left_join(auditor_data, city_to_county, by = "city")
 final_data$county[final_data$city == "Carmel-by-the-Sea"] <- "Monterey"
 final_data$county[final_data$city == "Gustine"] <- "Merced"
 final_data$county[final_data$city == "Paso Robles"] <- "San Luis Obispo"
+# Note: city-to-dictionary has Ventura listed as San Buenaventura
 final_data$county[final_data$city == "Ventura"] <- "Ventura"
 
 # Manually insert zipcode for 4 cities that are lacking in dictionary
@@ -37,18 +38,41 @@ final_data$zipcode[final_data$city == "Ventura"] <- "93001"
 
 # 2. Merge external data with auditor data --------------------------------
 final_data <- final_data |>
+  # Likely ignore voter registration (no significant association)
   left_join(county_voter_reg, by = "county") |>
+  left_join(county_voter_turnout, by = "county") |>
   left_join(county_ed, by = "county") |>
   left_join(county_econ, by = "county") |>
   left_join(county_demos, by = "county")
 
 # 3. Export model input ---------------------------------------------------
-# Place geographical columns (city, county, zipcode) in beginning for clarity
-loc_vars <- c("city", "county", "zipcode")
-final_data <- data.frame(final_data |> select(all_of(loc_vars)), final_data |> select(!all_of(loc_vars)))
+# Select subset of data used for model building
+final_data <- final_data |>
+  # Focus on 2018 auditor data (non-pandemic data)
+  filter(fy_end == 2018) |>
+  # Focus on predictors from 2008 (decade before 2018 and recession)
+  select(c(city, county, zipcode, overall_risk:net_opeb_liability_or_asset, contains("08"))) |>
+  # Remove redundant variables in 2018 auditor data
+  select(!c(population, unemployment_rate, contains("age_m"), contains("age_f"), contains("prop_f")))
+
+# Simplify variable names by removing year component
+names(final_data) <- str_remove(names(final_data), "_08")
+
+# Build new features
+final_data$county_per_cap_precints <- final_data$county_n_precincts / final_data$county_pop
+final_data$good_pension_health <- final_data$pension_funding_ratio >= 0.8
+couty_job_density <- (final_data$county_n_jobs / ((1 - final_data$county_unemployment) * final_data$county_pop))
+final_data$is_county_job_center <- (couty_job_density > median(couty_job_density))
+
+# Rearrange order of columns
+first_vars <- c("city", "county", "zipcode", "overall_risk", "overall_points",
+                "county_voter_reg", "county_voter_turnout", "county_prop_mail_vote",
+                "county_n_precincts")
+final_data <- final_data |>
+  select(c(all_of(first_vars), !all_of(first_vars)))
 
 # Store local copy of model input
-write_csv(final_data, "final_data_ip.csv")
+write_csv(final_data, "final_data_18.csv")
 
 # -------------------------------------------------------------------------
 # 4. In-progress -------------------------------------------------------------
@@ -59,7 +83,12 @@ write_csv(final_data, "final_data_ip.csv")
 prop_na_orig <- mean(is.na(final_data))
 prop_na_orig_cols <- apply(final_data, 2, function(x) {mean(is.na(x))})
 
+# Add
+## Counties with more jobs than residents
+## Tax base
+## Ethnicity
+
 # 5. Clean workspace ------------------------------------------------------
-rm(city_to_county, county_voter_reg, auditor_data, county_ed, county_econ,
-   county_demos, loc_vars)
+rm(auditor_data, city_to_county, county_voter_reg, county_voter_turnout,
+   county_ed, county_econ, county_demos, first_vars, couty_job_density)
 

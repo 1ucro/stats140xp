@@ -2,7 +2,7 @@
 # File           :  x03_prep_voting_data
 # Purpose        :  Load and clean data on county voter registration (2002-2020)
 # Notes          :  Selected registration closest to election (usually 15-day)
-# Last modified  :  03/02/2023
+# Last modified  :  03/09/2023
 #==============================================================================
 
 # 1. Load county voter registration ---------------------------------------
@@ -95,7 +95,22 @@ county_voter_reg <- data.frame(
   "county_voter_reg_19"  =  voter_reg_19$registered / voter_reg_19$eligible,
   "county_voter_reg_20"  =  voter_reg_20$registered / voter_reg_20$eligible)
 
-# 4. Clean workspace ------------------------------------------------------
+
+# 4. Read 2008 county voter turnout rates ---------------------------------
+# Load data
+# Source: IN-PROGRESS
+county_voter_turnout <- read_xlsx("data/voter_turnout_data/ca_voters_2008.xlsx") |>
+  select("county"                    =  County,
+         "county_n_precincts_08"     =  `Number of Precincts`,
+         "county_prop_mail_vote_08"  =  Percent_of_Vote_By_Mail_Voters,
+         "county_voter_turnout_08"   =  `Percent of Eligible`)
+
+# Convert Excel values to numeric integers and proportions
+county_voter_turnout$county_n_precincts_08 <- as.numeric(str_remove(county_voter_turnout$county_n_precincts_08, ","))
+county_voter_turnout$county_prop_mail_vote_08 <- as.numeric(str_remove(county_voter_turnout$county_prop_mail_vote_08, "%")) / 100
+county_voter_turnout$county_voter_turnout_08 <- as.numeric(str_remove(county_voter_turnout$county_voter_turnout_08, "%")) / 100
+
+# 5. Clean workspace ------------------------------------------------------
 rm(voter_reg_02, voter_reg_03, voter_reg_04, voter_reg_05, voter_reg_06, voter_reg_07,
    voter_reg_08, voter_reg_09, voter_reg_10, voter_reg_11, voter_reg_12, voter_reg_13,
    voter_reg_14, voter_reg_15, voter_reg_16, voter_reg_17, voter_reg_18, voter_reg_19,
