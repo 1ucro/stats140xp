@@ -2,7 +2,7 @@
 
 *Is there a significant correlation between the fiscal health of CA cities and local levels of civic engagement?*
 
-To access the data for this project, download *final_data_18.csv* (2008-2018), *final_data_19.csv* (2009-2019), or *final_data_ip.csv* (2000-2020). To recreate the data, download and run the R scripts in *stats140_proj_code.zip*.
+To access the data for this project, download *final_data_18.csv* (2008-2018). To recreate the data, download and run the R scripts in *stats140_proj_code.zip*.
 
 ## Data
 - [CA auditor (2016-2020)](https://www.auditor.ca.gov/local_high_risk/dashboard-csa) 
