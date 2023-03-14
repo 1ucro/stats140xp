@@ -1,6 +1,6 @@
 # Stats 140XP Project
 
-*Can the fiscal health of CA cities be predicted from past civic engagement?*
+*Is there a significant correlation between the fiscal health of CA cities and past civic engagement?*
 
 To access the data for this project, download *final_data_18.csv* (2008-2018), *final_data_19.csv* (2009-2019), or *final_data_ip.csv* (2000-2020). To recreate the data, download and run the R scripts in *stats140_proj_code.zip*.
 
